@@ -1,14 +1,5 @@
 <html lang="en">
 <head>
-   <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-BES0844ZG2"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-BES0844ZG2');
-</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>CloudFlixx TV</title>
@@ -231,7 +222,7 @@
       </div>
     </div>
     <div id="controls">
-      <input type="text" id="address-input" placeholder="Enter M3U playlist URL">
+      <input type="text" id="address-input" placeholder="Enter M3U playlist URL" value="https://iptv-org.github.io/iptv/index.m3u" readonly>
       <button id="load-address">Load Playlist</button>
       <select id="quality-selector">
         <option value="auto">Auto</option>
@@ -742,16 +733,13 @@
     searchBox.addEventListener('input', filterChannels);
     categorySelector.addEventListener('change', filterChannels);
 
-    // Provide some sample IPTV links as placeholder
-    const sampleLinks = [
-      'https://iptv-org.github.io/iptv/index.m3u',
-      'https://iptv-org.github.io/iptv/categories/news.m3u',
-      'https://iptv-org.github.io/iptv/countries/za.m3u'
-    ];
-    addressInput.placeholder = `Try: ${sampleLinks[Math.floor(Math.random() * sampleLinks.length)]}`;
+    const defaultPlaylistUrl = 'https://iptv-org.github.io/iptv/index.m3u';
+    addressInput.value = defaultPlaylistUrl;
 
-    // Pre-fill with common playlist URL for demo purposes
-    addressInput.value = 'https://iptv-org.github.io/iptv/index.m3u';
+    // Load the default playlist when page loads
+    window.addEventListener('DOMContentLoaded', () => {
+      parseM3UPlaylist(defaultPlaylistUrl);
+    });
 
     // Extract category from channel info
     function extractCategory(channelInfo) {
