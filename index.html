@@ -413,7 +413,7 @@
                 // Try again with muted if needed
                 video.muted = true;
                 video.play().then(() => {
-                  showStatusMessage('Stream started muted (click for sound)', 'success');
+                  showStatusMessage('TV started muted (click for sound)', 'success');
                   // Let user unmute with click
                   video.addEventListener('click', () => {
                     if (video.muted) {
@@ -427,7 +427,7 @@
               });
             }
             
-            showStatusMessage('Stream loaded successfully', 'success');
+            showStatusMessage('Channel loaded successfully', 'success');
             setTimeout(() => {
               statusMessage.style.display = 'none';
             }, 3000);
@@ -444,7 +444,7 @@
             if (data.fatal) {
               switch(data.type) {
                 case Hls.ErrorTypes.NETWORK_ERROR:
-                  showStatusMessage('Network error, recovering...', 'error');
+                  showStatusMessage('Network error, recovering Channels', 'error');
                   
                   // Escalate buffer settings on network errors
                   if (currentBufferMode === 'standard') {
@@ -495,7 +495,7 @@
                       initPlayer(currentStreamUrl);
                     }, 2000);
                   } else {
-                    showStatusMessage(`Could not play stream after multiple attempts`, 'error');
+                    showStatusMessage(`Could not play Channel after multiple attempts`, 'error');
                   }
                   break;
               }
@@ -524,7 +524,7 @@
                 });
               });
             }
-            console.log('Native HLS support: stream loaded');
+            console.log('Native HLS support: Channel loaded');
           });
           
           // Add error handling for native player
@@ -542,7 +542,7 @@
             }
           });
         } else {
-          showStatusMessage('HLS playback not supported in this browser', 'error');
+          showStatusMessage('Streaming not supported in this browser', 'error');
         }
       } catch (e) {
         console.error('Player initialization error:', e);
@@ -552,7 +552,7 @@
 
     // Parse M3U playlist with improved error handling
     async function parseM3UPlaylist(url) {
-      showStatusMessage('Loading playlist...', 'success');
+      showStatusMessage('Loading Channels', 'success');
       channelListContainer.style.display = 'block';
       loadingIndicator.style.display = 'block';
       channelList.innerHTML = '';
